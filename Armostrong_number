@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<stdbool.h>
+// count digit in number
+int countdigit(int num){
+	if(num<10) return 1;
+	else return 1+countdigit(num/10);
+}
+// calculate power
+int power(int base,int exponent){
+	if(exponent==0) return 1;
+	else return base*power(base,exponent-1);
+}
+// calculate the sum 
+int calcul(int num,int count){
+	if(num<10) return power(num,count);
+	else return power(num%10,count)+calcul(num/10,count);
+}
+// check if number is armstrong or not 
+bool is_armastrong(int num,int count){
+	if(num==calcul(num,count))return true;
+	else return false; 
+}
+// Driver code
+int main(){
+int number;
+printf("Enter a number ");
+scanf("%d",&number);
+FILE *fp;
+fp=fopen("Armastrong.txt","w");
+if(is_armastrong(number,countdigit(number))){
+	printf("%d is an Armastrong number ",number);
+	fprintf(fp,"%d is an Armastrong number ",number);
+}
+else{
+	printf("%d is not an Armastrong number ",number);
+	fprintf(fp,"%d is not an Armastrong number ",number);
+}
+fclose(fp);
+	return 0;
+}
