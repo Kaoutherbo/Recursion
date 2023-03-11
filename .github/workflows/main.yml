@@ -1,0 +1,26 @@
+#include<stdio.h>
+int countdigit(int n){
+	if(n<10) return 1;
+	else return 1+countdigit(n/10);
+}
+int power(int x,int y){
+	 if(y==0) return 1;
+	else return x*power(x,y-1);
+}
+int reverse(int n){
+	int count=countdigit(n);
+	if(n<10) return n;
+	else return (n%10)*power(10,count-1)+reverse(n/10);
+}
+
+int main(){
+ int num;
+	printf("Enter a number  ");
+	scanf("%d",&num);
+	FILE *fp;
+	fp=fopen("reverse.txt","a");
+	printf("Reverse of this number is %d \n",reverse(num));
+	fprintf(fp," Reverse of the number is %d \n",reverse(num));
+	fclose(fp);
+	return 0;
+}
